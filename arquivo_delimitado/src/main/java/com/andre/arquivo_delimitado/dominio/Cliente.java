@@ -1,4 +1,4 @@
-package com.andre.arquivo_largura_fixa.dominio;
+package com.andre.arquivo_delimitado.dominio;
 
 import java.io.Serializable;
 

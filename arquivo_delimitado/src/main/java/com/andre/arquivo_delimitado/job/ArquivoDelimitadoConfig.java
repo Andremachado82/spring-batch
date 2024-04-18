@@ -1,4 +1,4 @@
-package com.andre.arquivo_largura_fixa.job;
+package com.andre.arquivo_delimitado.job;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -10,16 +10,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ArquivoLarguraFixaJobConfig {
+public class ArquivoDelimitadoConfig {
 
     @Autowired
     public JobRepository jobRepository;
 
     @Bean
-    public Job arquivoLarguraFixaJob(Step leituraArquivoLarguraFixaStep) {
-        return new JobBuilder("arquivoLarguraFixaJob", jobRepository)
-                .start(leituraArquivoLarguraFixaStep)
-//                .incrementer(new RunIdIncrementer())
+    public Job arquivoDelimitadoJob(Step leituraArquivoDelimitadoStep) {
+        return new JobBuilder("arquivoDelimitadoJob", jobRepository)
+                .start(leituraArquivoDelimitadoStep)
+                .incrementer(new RunIdIncrementer())
                 .build();
     }
 }

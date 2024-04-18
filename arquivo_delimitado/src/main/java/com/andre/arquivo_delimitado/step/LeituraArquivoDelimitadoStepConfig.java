@@ -1,6 +1,6 @@
-package com.andre.arquivo_largura_fixa.step;
+package com.andre.arquivo_delimitado.step;
 
-import com.andre.arquivo_largura_fixa.dominio.Cliente;
+import com.andre.arquivo_delimitado.dominio.Cliente;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-public class LeituraArquivoLarguraFixaStepConfig {
+public class LeituraArquivoDelimitadoStepConfig {
 
     @Autowired
     private JobRepository jobRepository;
@@ -22,12 +22,12 @@ public class LeituraArquivoLarguraFixaStepConfig {
 
 
     @Bean
-    public Step leituraArquivoLarguraFixaStep(ItemReader<Cliente> leituraArquivoLarguraFixaReader,
-                                              ItemWriter<Cliente> leituraArquivoLarguraFixaWriter) {
-        return new StepBuilder("leituraArquivoLarguraFixaStep", jobRepository)
+    public Step leituraArquivoDelimitadoStep(ItemReader<Cliente> leituraArquivoDelimitadoReader,
+                                              ItemWriter<Cliente> leituraArquivoDelimitadoWriter) {
+        return new StepBuilder("leituraArquivoDelimitadoStep", jobRepository)
                 .<Cliente, Cliente>chunk(4, platformTransactionManager)
-                .reader(leituraArquivoLarguraFixaReader)
-                .writer(leituraArquivoLarguraFixaWriter)
+                .reader(leituraArquivoDelimitadoReader)
+                .writer(leituraArquivoDelimitadoWriter)
                 .build();
     }
 }
