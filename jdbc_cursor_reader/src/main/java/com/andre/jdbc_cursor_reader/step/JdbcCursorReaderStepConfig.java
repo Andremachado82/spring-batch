@@ -28,6 +28,9 @@ public class JdbcCursorReaderStepConfig {
                 .<Cliente, Cliente>chunk(4, platformTransactionManager)
                 .reader(jdbcCursorReader)
                 .writer(jdbcCursorWriter)
+                .faultTolerant()
+                .skip(Exception.class)
+                .skipLimit(2)
                 .build();
     }
 }
