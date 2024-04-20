@@ -6,7 +6,7 @@ import com.andre.demonstrativo_orcamentario.writer.DemonstrativoOrcamentarioRoda
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.file.MultiResourceItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,10 +28,10 @@ public class DemonstrativoOrcamentarioStepConfig {
             //MultiResourceItemReader<GrupoLancamento> demonstrativoOrcamentarioReader,
             // Esse aqui lê do banco de dados
             GrupoLancamentoReader demonstrativoOrcamentarioReader,
-            ItemWriter<GrupoLancamento> demonstrativoOrcamentarioWriter,
+            MultiResourceItemWriter<GrupoLancamento> demonstrativoOrcamentarioWriter,
             DemonstrativoOrcamentarioRodape rodapeCallBack) {
         return new StepBuilder("demonstrativoOrcamentarioStep", jobRepository)
-                .<GrupoLancamento, GrupoLancamento>chunk(100, platformTransactionManager)
+                .<GrupoLancamento, GrupoLancamento>chunk(1, platformTransactionManager)
                 .reader(demonstrativoOrcamentarioReader)
                 .writer(demonstrativoOrcamentarioWriter)
                 .listener(rodapeCallBack)
