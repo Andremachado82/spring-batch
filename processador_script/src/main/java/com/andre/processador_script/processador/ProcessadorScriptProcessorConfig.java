@@ -17,7 +17,10 @@ public class ProcessadorScriptProcessorConfig {
                 .language("nashorn")
                 .scriptSource(
                         "var email = item .getEmail();" +
-                        "var arquivoExiste = `ls | grep ${email}.txt`;" +
+                        "print(email);" +
+                        "var filePath = \"files/\" + email + \".txt\";" +
+                        "var path = java.nio.file.Paths.get(filePath);" +
+                        "var arquivoExiste = java.nio.file.Files.exists(path);" +
                         "if (!arquivoExiste) item; else null;"
                 )
                 .build();
