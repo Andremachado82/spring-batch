@@ -20,13 +20,13 @@ public class MigracaoDadosBancariosStepConfig {
     @Autowired
     private PlatformTransactionManager platformTransactionManager;
 
-
+    // Cuidar com o valor do chunck, pois ele deve ser usado moderadamente
     @Bean
     public Step migracaoDadosBancariosStep(
             ItemReader<DadosBancarios> arquivoDadosBancariosReader,
             ItemWriter<DadosBancarios> bancoDadosBancariosWriter) {
         return new StepBuilder("migracaoDadosBancariosStep", jobRepository)
-                .<DadosBancarios, DadosBancarios>chunk(1, platformTransactionManager)
+                .<DadosBancarios, DadosBancarios>chunk(10000, platformTransactionManager)
                 .reader(arquivoDadosBancariosReader)
                 .writer(bancoDadosBancariosWriter)
                 .build();
