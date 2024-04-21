@@ -1,9 +1,11 @@
 package com.andre.contas_bancarias.enums;
 
 public enum TipoConta {
-    PRATA, OURO, PLATINA, DIAMANTE;
+    PRATA, OURO, PLATINA, DIAMANTE, INVALIDA;
 
-    public static TipoConta fromFaixaSalarial(double faixaSalarial) {
+    public static TipoConta fromFaixaSalarial(Double faixaSalarial) {
+        if (faixaSalarial == null)
+            return INVALIDA;
         if (faixaSalarial <= 3000)
             return PRATA;
         else if (faixaSalarial > 3000 && faixaSalarial <= 5000)
