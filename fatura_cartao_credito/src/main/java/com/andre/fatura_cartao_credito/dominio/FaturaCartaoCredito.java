@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,5 +14,5 @@ public class FaturaCartaoCredito {
 
     private Cliente cliente;
     private CartaoCredito cartaoCredito;
-    private List<Transacao> transacoes;
+    private List<Transacao> transacoes = new ArrayList<>();
 }
