@@ -12,6 +12,6 @@ import java.util.Date;
 @ToString
 public class CartaoCredito {
 
-    private Integer id;
+    private Integer numeroCartaoCredito;
     private Cliente cliente;
 }
