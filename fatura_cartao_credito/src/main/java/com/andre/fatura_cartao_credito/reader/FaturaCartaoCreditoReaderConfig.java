@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Configuration
 public class FaturaCartaoCreditoReaderConfig implements ItemStreamReader<FaturaCartaoCredito> {
 
     private ItemStreamReader<Transacao> delegate;
@@ -58,16 +57,16 @@ public class FaturaCartaoCreditoReaderConfig implements ItemStreamReader<FaturaC
 
     @Override
     public void open(ExecutionContext executionContext) throws ItemStreamException {
-        ItemStreamReader.super.open(executionContext);
+        delegate.open(executionContext);
     }
 
     @Override
     public void update(ExecutionContext executionContext) throws ItemStreamException {
-        ItemStreamReader.super.update(executionContext);
+        delegate.update(executionContext);
     }
 
     @Override
     public void close() throws ItemStreamException {
-        ItemStreamReader.super.close();
+        delegate.close();
     }
 }

@@ -3,6 +3,7 @@ package com.andre.fatura_cartao_credito.step;
 import com.andre.fatura_cartao_credito.dominio.FaturaCartaoCredito;
 import com.andre.fatura_cartao_credito.dominio.Transacao;
 import com.andre.fatura_cartao_credito.reader.FaturaCartaoCreditoReaderConfig;
+import com.andre.fatura_cartao_credito.writer.TotalTransacoesFooterCallback;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -27,12 +28,14 @@ public class FaturaCartaoCreditoStepConfig {
     public Step faturaCartaoCreditoStep(
             ItemStreamReader<Transacao> lerTransacoesReader,
             ItemProcessor<FaturaCartaoCredito, FaturaCartaoCredito> carregarDadosClienteProcessor,
-            ItemWriter<FaturaCartaoCredito> escreverFaturaCartaoCredito) {
-        return new StepBuilder("criacaoContasStep", jobRepository)
+            ItemWriter<FaturaCartaoCredito> escreverFaturaCartaoCredito,
+            TotalTransacoesFooterCallback listener) {
+        return new StepBuilder("faturaCartaoCreditoStep", jobRepository)
                 .<FaturaCartaoCredito, FaturaCartaoCredito>chunk(1, platformTransactionManager)
                 .reader(new FaturaCartaoCreditoReaderConfig(lerTransacoesReader))
                 .processor(carregarDadosClienteProcessor)
                 .writer(escreverFaturaCartaoCredito)
+                .listener(listener)
                 .build();
     }
 }
