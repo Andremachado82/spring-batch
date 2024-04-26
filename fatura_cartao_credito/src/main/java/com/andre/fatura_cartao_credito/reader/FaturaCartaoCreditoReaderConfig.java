@@ -15,15 +15,12 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class FaturaCartaoCreditoReaderConfig implements ItemStreamReader<FaturaCartaoCredito> {
 
     private ItemStreamReader<Transacao> delegate;
     private Transacao transacaoAtual;
-
-    public FaturaCartaoCreditoReaderConfig(ItemStreamReader<Transacao> delegate) {
-        this.delegate = delegate;
-    }
 
     @Override
     public FaturaCartaoCredito read() throws Exception {
@@ -46,13 +43,17 @@ public class FaturaCartaoCreditoReaderConfig implements ItemStreamReader<FaturaC
     }
 
     private boolean isTransacaoRelacionada(Transacao transacao) throws Exception {
-        return peek() != null && transacao.getCartaoCredito().getNumeroCartaoCredito() 
-                == transacaoAtual.getCartaoCredito().getNumeroCartaoCredito();
+        return peek() != null && Objects.equals(transacao.getCartaoCredito().getNumeroCartaoCredito(),
+                transacaoAtual.getCartaoCredito().getNumeroCartaoCredito());
     }
 
     private Transacao peek() throws Exception {
         transacaoAtual = delegate.read();
         return transacaoAtual;
+    }
+
+    public FaturaCartaoCreditoReaderConfig(ItemStreamReader<Transacao> delegate) {
+        this.delegate = delegate;
     }
 
     @Override

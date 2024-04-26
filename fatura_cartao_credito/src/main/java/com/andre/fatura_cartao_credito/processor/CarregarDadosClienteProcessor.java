@@ -29,7 +29,7 @@ public class CarregarDadosClienteProcessor implements ItemProcessor<FaturaCartao
         restTemplate.getMessageConverters().add(mapper);
 
        String uri =
-               String.format("http://my-json-server.typicode.com/giuliana-bezerra/demo/profile/%s",
+               String.format("http://my-json-server.typicode.com/giuliana-bezerra/demo/profile/%d",
                        faturaCartaoCredito.getCliente().getId());
         ResponseEntity<Cliente> response = restTemplate.getForEntity(uri, Cliente.class);
 

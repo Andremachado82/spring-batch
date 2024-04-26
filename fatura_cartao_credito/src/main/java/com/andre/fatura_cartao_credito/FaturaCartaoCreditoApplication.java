@@ -10,5 +10,4 @@ public class FaturaCartaoCreditoApplication {
 		var context = SpringApplication.run(FaturaCartaoCreditoApplication.class, args);
 		context.close();
 	}
-
 }

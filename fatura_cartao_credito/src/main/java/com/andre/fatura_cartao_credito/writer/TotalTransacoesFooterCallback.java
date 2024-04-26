@@ -17,7 +17,7 @@ public class TotalTransacoesFooterCallback implements FlatFileFooterCallback {
 
     @Override
     public void writeFooter(Writer writer) throws IOException {
-        writer.append(String.format("\n%121s", "Total: " + NumberFormat.getCurrencyInstance().format(total)));
+        writer.write(String.format("\n%121s", "Total: " + NumberFormat.getCurrencyInstance().format(total)));
     }
 
     @BeforeWrite

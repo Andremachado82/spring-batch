@@ -17,7 +17,7 @@ public class FaturaCartaoCreditoJobConfig {
 
     @Bean
     public Job faturaCartaoCreditoJob(Step faturaCartaoCreditoStep) {
-        return new JobBuilder("contasBancariasJob", jobRepository)
+        return new JobBuilder("faturaCartaoCreditoStep", jobRepository)
                 .start(faturaCartaoCreditoStep)
                 .incrementer(new RunIdIncrementer())
                 .build();
